@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Handlebars</title>
+</head>
+<body>
+
+	<div id="action"></div>
+
+	<script type="text/x-handlebars-template" id="index"><!--se crea la estructura de la plantilla-->
+		<!--a menos que sea false se muestra-->
+		{{#each registros}}
+			<h2>{{{nombre}}} {{{apellidos}}}, {{{edad}}}</h2>
+		{{/each}}
+
+	</script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+
+	<script type="text/javascript">//aquí está la data
+		var template= document.getElementById("index").innerHTML; //consigue la plantilla
+		console.log(template);
+		var compilar = Handlebars.compile(template); //compila la plantilla
+
+		var persona = {
+			registros: [
+				{
+					nombre: "samanta",
+					apellidos: "<em>flores</em>",
+					edad: 1,
+					mayor_edad: false
+				},
+				{
+					nombre: "luis",
+					apellidos: "<em style='color:pink'>garcia mendez</em>",
+					edad: 23,
+					mayor_edad: false
+				},
+				{
+					nombre: "laura",
+					apellidos: "<em>Hernández</em>",
+					edad: 28,
+					mayor_edad: false
+				}
+			]
+		};
+
+		var compiladoHTML = compilar(persona);
+
+		document.getElementById("action").innerHTML += compiladoHTML;//añade la plantilla con data al elemento con el id "action"
+	</script>
+</body>
+</html>
